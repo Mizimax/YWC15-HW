@@ -1,0 +1,33 @@
+#header {
+  padding: 100px 0;
+  background: #0A237E;
+  color: white;
+  text-align: center;
+}
+
+.arrow {
+  position: relative;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 10px;
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+@keyframes arrow {
+  from   {top: 0;}
+  to     {top: 20px;}
+}
+
+.arrow.animate {
+  -webkit-animation: arrow 1s infinite;
+  animation: arrow 1s infinite;
+}
+
+.font-header {
+  font-size: 30px;
+}
