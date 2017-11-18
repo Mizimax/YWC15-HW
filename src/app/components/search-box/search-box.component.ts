@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchBoxComponent implements OnInit {
 
+  public dropdownToggle: boolean = false;
+  public searchFrom: string = 'ทั้งหมด';
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  toggle() {
+    this.dropdownToggle = !this.dropdownToggle;
+  }
+
+  dropdownSelected(val) {
+    this.searchFrom = val
   }
 
 }

@@ -1,3 +1,15 @@
-<p>
-  search-box works!
-</p>
+<div class="group" align="center">
+  <span class="branch-select">เลือกสาขา</span> 
+  <br><br>
+  <button class="button is-info" (click)="toggle()" >{{ searchFrom }} <span class="icon">▼</span></button>
+  <div class="dropdown-menu dropdown-menu-right" [ngClass]="{ 'show': dropdownToggle }" (click)="toggle()">
+    <div class="dropdown-item" (click)="dropdownSelected('Web Content')">Web Content</div>
+    <div class="dropdown-item" (click)="dropdownSelected('Web Design')">Web Design</div>
+    <div class="dropdown-item" (click)="dropdownSelected('Web Marketing')">Web Marketing</div>
+    <div class="dropdown-item" (click)="dropdownSelected('Web Programming')">Web Programming</div>
+    <div class="dropdown-item" (click)="dropdownSelected('ทั้งหมด')">ทั้งหมด</div>
+  </div>
+</div>
+<div class="InputAddOn">
+  <input class="input" placeholder="ค้นหา ชื่อ นามสกุล">
+</div>
