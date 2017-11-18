@@ -11,6 +11,8 @@ import { SelectBranchComponent } from './pages/select-branch/select-branch.compo
 import { AnnouncementService } from './services/announcement.service';
 
 import { routes } from './app.router';
+import { SearchBoxComponent } from './components/search-box/search-box.component';
+import { ResultTableComponent } from './components/result-table/result-table.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { routes } from './app.router';
     AppComponent,
     HeaderComponent,
     AnnouncementComponent,
-    SelectBranchComponent
+    SelectBranchComponent,
+    SearchBoxComponent,
+    ResultTableComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
