@@ -5,8 +5,10 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-import { AnnouncementComponent } from './components/announcement/announcement.component';
-import { SelectBranchComponent } from './components/select-branch/select-branch.component';
+import { AnnouncementComponent } from './pages/announcement/announcement.component';
+import { SelectBranchComponent } from './pages/select-branch/select-branch.component';
+
+import { AnnouncementService } from './services/announcement.service';
 
 import { routes } from './app.router';
 
@@ -23,7 +25,9 @@ import { routes } from './app.router';
     BrowserModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    AnnouncementService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
