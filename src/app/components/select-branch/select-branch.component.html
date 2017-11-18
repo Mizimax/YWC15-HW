@@ -1,0 +1,17 @@
+<div class="branch-container" [@fadeAnimation]>
+  <div class="branch" align="center">
+    เลือกสาขา
+  </div>
+  <div class="img-container">
+    <div class="img" *ngFor="let branch of branchList" (click)="branchSelected(branch.route)">
+      <div class="sign">
+        <div class="sign-content">
+          <img width="180" height="150" [src]="branch.imgSrc">
+        </div>
+      </div>
+      <div class="title" align="center">
+        {{ branch.title }}
+      </div>
+    </div>
+  </div>
+</div>
