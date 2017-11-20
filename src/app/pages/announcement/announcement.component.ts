@@ -1,24 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { BranchService } from '../../services/branch.service';
+import { AnnouncementService } from '../../services/announcement.service';
+
+import { fadeAnimation } from '../../animations/fade.animation'
 
 @Component({
   selector: 'app-announcement',
   templateUrl: './announcement.component.html',
-  styleUrls: ['./announcement.component.css']
+  styleUrls: ['./announcement.component.css'],
+  animations: [fadeAnimation]
 })
 export class AnnouncementComponent implements OnInit {
 
   public selectedName: string;
   public selected: boolean = false;
 
-  constructor() { }
+  @ViewChild('container') el;
+
+  private resultSubs;
+  private routeSubs;
+
+  constructor(private route: ActivatedRoute, private branch: BranchService, private announce: AnnouncementService) { }
 
   ngOnInit() {
-  }
 
-  onSelect(selectedName: string) {
-    this.selectedName = selectedName;
-    this.selected = true;
-    console.log('test');
+    this.el.nativeElement.scrollIntoView();
+
+    this.routeSubs = this.route.params.subscribe(params => {
+      this.branch.selectBranch(params['name']);
+     // this.resultSubs = this.announce.toEachBranchResult(params['name']);
+    });
+  }
+  
+  ngOnDestroy() {
+    this.routeSubs.unsubscribe();
+    //this.resultSubs.unsubscribe();  
   }
 
 }

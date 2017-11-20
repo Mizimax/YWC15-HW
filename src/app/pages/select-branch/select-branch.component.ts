@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { fadeAnimation } from '../../animations/fade.animation'
+import { BranchService } from '../../services/branch.service';
+
+import { fadeAnimation } from '../../animations/fade.animation';
 
 @Component({
   selector: 'app-select-branch',
@@ -11,36 +13,23 @@ import { fadeAnimation } from '../../animations/fade.animation'
 })
 export class SelectBranchComponent implements OnInit {
 
-  public branchList = [
-    {
-      imgSrc: "https://ywc15.ywc.in.th/static/img/roles/content.png",
-      title: "Web Content",
-      route: "content"
-    },
-    {
-      imgSrc: "https://ywc15.ywc.in.th/static/img/roles/design.png",
-      title: "Web Design",
-      route: "design"
-    },
-    {
-      imgSrc: "https://ywc15.ywc.in.th/static/img/roles/marketing.png",
-      title: "Web Marketing",
-      route: "marketing"
-    },
-    {
-      imgSrc: "https://ywc15.ywc.in.th/static/img/roles/programming.png",
-      title: "Web Programming",
-      route: "programming"
-    }
-  ]
+  @ViewChild('container') el;
 
-  constructor(private router: Router) { }
+  public branchList;
+
+  constructor(private router: Router, private branch: BranchService) { }
 
   ngOnInit() {
+    this.el.nativeElement.scrollIntoView();
+    this.branchList = this.branch.branchList;
   }
 
   branchSelected(value) {
     this.router.navigate(['branch', value]);
+  }
+
+  getBranchList() {
+    return Object.keys(this.branchList);
   }
 
 }

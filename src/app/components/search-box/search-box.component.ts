@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { BranchService } from '../../services/branch.service';
+
 
 @Component({
   selector: 'app-search-box',
@@ -10,9 +14,17 @@ export class SearchBoxComponent implements OnInit {
   public dropdownToggle: boolean = false;
   public searchFrom: string = 'ทั้งหมด';
 
-  constructor() { }
+  private branchSubs;
+
+  constructor(
+    private branch: BranchService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    this.branchSubs = this.branch.getBranch().subscribe( branch => {
+      this.searchFrom = this.branch.getBranchTitle(branch);
+    })
   }
 
   toggle() {
@@ -20,7 +32,12 @@ export class SearchBoxComponent implements OnInit {
   }
 
   dropdownSelected(val) {
-    this.searchFrom = val
+    this.searchFrom = this.branch.branchList[val].title;
+    this.router.navigate(['branch', val]);
+  }
+
+  ngOnDestroy() {
+    this.branchSubs.unsubscribe();
   }
 
 }

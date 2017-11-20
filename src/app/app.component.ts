@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { AnnouncementService } from './services/announcement.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  
+  constructor(private http: HttpClient, private announce: AnnouncementService){
+    this.http.get('https://ywc15.ywc.in.th/api/interview')
+             .subscribe( result => {
+               this.announce.setAllResult(result);
+             })
+  }
 }
