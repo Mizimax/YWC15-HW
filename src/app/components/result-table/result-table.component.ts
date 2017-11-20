@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { AnnouncementService } from '../../services/announcement.service';
@@ -16,6 +16,11 @@ export class ResultTableComponent implements OnInit {
 
   private resultSubs;
 
+  @ViewChild('arrow1') arr1;
+  @ViewChild('arrow2') arr2;
+  @ViewChild('arrow3') arr3;
+  @ViewChild('arrow4') arr4;
+
   constructor(private announce: AnnouncementService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -28,6 +33,8 @@ export class ResultTableComponent implements OnInit {
 
           this.ResultMorningList = this.announce.Result[paramName][0];
           this.ResultAfternoonList = this.announce.Result[paramName][1];
+
+          this.resetSort();
           //fade
           this.contentChanged = true;
           setTimeout(()=> this.contentChanged = false, 600)
@@ -36,7 +43,6 @@ export class ResultTableComponent implements OnInit {
   }
 
   sortRef(el) {
-    console.dir(el)
     if(el.innerText === '▼') {
       el.innerText = '▲';
       el.parentNode.previousElementSibling.childNodes[1].innerText = '▼';
@@ -62,7 +68,6 @@ export class ResultTableComponent implements OnInit {
   }
 
   sortString(el) {
-    console.dir(el);
     if(el.innerText === '▼') {
       el.innerText = '▲';
       el.parentNode.nextElementSibling.childNodes[1].innerText = '▼';
@@ -85,6 +90,13 @@ export class ResultTableComponent implements OnInit {
         this.ResultAfternoonList = this.announce.sortString(this.ResultAfternoonList).reverse();
       }
     }
+  }
+
+  resetSort() {
+    this.arr1.nativeElement.innerText = '▼';
+    this.arr2.nativeElement.innerText = '▲';
+    this.arr3.nativeElement.innerText = '▼';
+    this.arr4.nativeElement.innerText = '▲';
   }
 
   ngOnDestroy() {
