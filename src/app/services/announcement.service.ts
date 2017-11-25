@@ -10,14 +10,16 @@ export class AnnouncementService {
     interviewRef: 'กำลังโหลด'
   }
 
-  private allResult = new BehaviorSubject<any>(undefined);
+  private allResult;
+  public resultStatus = new BehaviorSubject<any>(undefined);
 
   public Result = {};
 
   constructor() { }
 
   setAllResult(data) {
-    this.allResult.next(data);
+    this.allResult = data
+
     this.toEachBranchResult('content');
     this.toEachBranchResult('design');
     this.toEachBranchResult('marketing');
@@ -36,12 +38,13 @@ export class AnnouncementService {
         ...this.Result['programming'][1]
       ]
     ];
-    this.allResult.next('complete');
+
+    this.resultStatus.next('complete');
   }
 
   toEachBranchResult(branch: string) {
 
-    let res = this.allResult.getValue();
+    let res = this.allResult;
     let result, morningResult, afternoonResult;
 
     result = res.filter(data => data.major === branch);   
@@ -67,6 +70,26 @@ export class AnnouncementService {
 
     this.Result[branch] = [morningResult,afternoonResult];
 
+  }
+
+  searchRef(ref: string) {
+    let result = this.allResult.filter(data => data.interviewRef === ref);
+    return result[0];
+  }
+
+  searchName(name: string, branch: string) {
+    let morningResult = this.Result[branch][0].filter(data => {
+      let fullName = data['firstName'] + ' ' + data['lastName'];
+      return ~fullName.indexOf(name)
+    });
+
+    let afternoonResult = this.Result[branch][1].filter(data => {
+      let fullName = data['firstName'] + ' ' + data['lastName'];
+      return ~fullName.indexOf(name)
+    });
+
+    let result = [...morningResult, ...afternoonResult]
+    return result[0];
   }
 
   sortRef(data: object[]) {

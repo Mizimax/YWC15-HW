@@ -1,25 +1,28 @@
 <div class="result-box" [ngClass]="{ 'fade': contentChanged }">
-  <div class="box">
+  <div class="box" align="center">
     <div class="round">สัมภาษณ์รอบเช้า</div>
     <table width="100%" class="table" cellspacing="0">
       <tr class="th sort">
         <th (click)="sortString(arrow1)">ชื่อ-นามสกุล <span id="arrow1" #arrow1>▼</span></th>
         <th (click)="sortRef(arrow2)" width="100px" class="border-left">Ref. <span id="arrow2" #arrow2>▲</span></th>
       </tr>
-      <tr class="select" align="center" *ngFor="let result of ResultMorningList">
+      <tr class="select" align="center"  *ngFor="let result of ResultMorningList" id="{{ result.interviewRef }}" (click)="share(result.interviewRef)">
         <td class="border-bot">{{ result.firstName + ' ' + result.lastName }}</td>
         <td class="border-bot border-left">{{ result.interviewRef  }}</td>
       </tr>
     </table>
+    <br><br>
+    <button class="button is-info">เลือกรายชื่อแล้ว<br>แชร์ให้เพื่อนคุณสิ</button>
   </div>
-  <div class="box">
+
+  <div class="box" align="center">
     <div class="round">สัมภาษณ์รอบบ่าย</div>
     <table width="100%" class="table" cellspacing="0">
       <tr class="th sort">
         <th (click)="sortString(arrow3)">ชื่อ-นามสกุล <span id="arrow3" #arrow3>▼</span></th>
         <th (click)="sortRef(arrow4)" width="100px" class="border-left">Ref. <span id="arrow4" #arrow4>▲</span></th>
       </tr>
-      <tr class="select" align="center" *ngFor="let result of ResultAfternoonList" (click)="share(result.interviewRef)">
+      <tr class="select" align="center" *ngFor="let result of ResultAfternoonList" id="{{ result.interviewRef }}" (click)="share(result.interviewRef)">
         <td class="border-bot">{{ result.firstName + ' ' + result.lastName }}</td>
         <td class="border-bot border-left">{{ result.interviewRef  }}</td>
       </tr>

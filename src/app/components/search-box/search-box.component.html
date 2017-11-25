@@ -10,6 +10,10 @@
     <div class="dropdown-item" (click)="dropdownSelected('all')">ทั้งหมด</div>
   </div>
 </div>
+<br><br>
 <div class="InputAddOn">
-  <input class="input" placeholder="ค้นหา ชื่อ นามสกุล">
+  <form (submit)="search(text.value)" onsubmit="return false">
+    <input id="searchBox" #text class="input" placeholder="ค้นหา ชื่อ-นามสกุล">
+    <button class="button is-info search">ค้นหา</button>
+  </form>
 </div>

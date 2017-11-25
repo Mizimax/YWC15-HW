@@ -30,13 +30,11 @@ export class AnnouncementComponent implements OnInit {
 
     this.routeSubs = this.route.params.subscribe(params => {
       this.branch.selectBranch(params['name']);
-     // this.resultSubs = this.announce.toEachBranchResult(params['name']);
     });
   }
-  
+
   ngOnDestroy() {
-    this.routeSubs.unsubscribe();
-    //this.resultSubs.unsubscribe();  
+    this.routeSubs.unsubscribe(); 
   }
 
 }

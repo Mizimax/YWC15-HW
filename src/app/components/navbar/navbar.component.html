@@ -1,0 +1,30 @@
+<nav class="navbar-fixed" [ngClass]="{ 'slide-down': navBarShow }">
+  <div class="container" align="center">
+    <div class="col-2">
+      <div class="ywc-full">Young Webmaster Camp</div>
+      <div class="ywc">YWC#15</div>
+    </div>
+
+    <div class="col-8">
+      <button class="button is-info font-small" (click)="toggle()" >{{ searchFrom }} <span class="icon">▼</span></button>
+      <div class="dropdown-menu dropdown-menu-right" [ngClass]="{ 'show': dropdownToggle }" (click)="toggle()">
+        <div class="dropdown-item" (click)="dropdownSelected('content')">Web Content</div>
+        <div class="dropdown-item" (click)="dropdownSelected('design')">Web Design</div>
+        <div class="dropdown-item" (click)="dropdownSelected('marketing')">Web Marketing</div>
+        <div class="dropdown-item" (click)="dropdownSelected('programming')">Web Programming</div>
+        <div class="dropdown-item" (click)="dropdownSelected('all')">ทั้งหมด</div>
+      </div>
+    </div>
+    <form (submit)="search(text.value)" onsubmit="return false">
+      <div class="col-2 input-container">
+          <input #text class="input middle search" placeholder="ค้นหา ชื่อ-นามสกุล">
+          <button class="button is-info search">ค้นหา</button>
+          <div class="icon-search">
+            <a [routerLink]="['/branch',currentBranch]" [queryParams]="{ ref: 'searchBox' }">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+          </div>
+      </div>
+    </form>
+  </div>
+</nav>

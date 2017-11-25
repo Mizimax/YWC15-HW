@@ -1,0 +1,30 @@
+<div class="modal" [ngClass]="{'active': modalToggled}">
+  <div class="modal-container">
+    <div class="modal-header">
+      <div class="modal-title">แชร์</div>
+      <div class="cancel" (click)="modalClose()">x</div>
+    </div>
+    <div class="modal-body">
+      <div class="content" align="center">
+        <div *ngIf="name">
+          ยินดีด้วยน้อง<br> {{ name }} <br>ผ่านเข้ารอบสัมภาษณ์ สาขา {{ currentBranch }}
+        </div>
+        <div *ngIf="!name">
+          ประกาศผลสาขา {{ currentBranch }}
+        </div>
+        <br><br>
+        <share-buttons [theme]="'modern-dark'"
+         [include]="['facebook','twitter','linkedin','pinterest','google','email']"
+         [show]="6"
+         [url]="getCopyValue()"
+        ></share-buttons>
+        <br><br>
+        <input #copyUrl class="input" style="width: 90%; margin-bottom: 10px;" [value]="getCopyValue()">
+        <button class="button is-info is-small" (click)="copy(copyUrl)">Copy URL</button>
+      </div>
+    </div>
+    <div class="modal-footer" align="center">
+      
+    </div>
+  </div>
+</div>
